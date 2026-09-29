@@ -1,25 +1,22 @@
 class Solution {
     public String minWindow(String s, String t) {
-        int m=s.length();
-        int n=t.length();
+        int n=s.length();
+        int m=t.length();
         int hash[]=new int [256];
-        for(int i=0;i<n;i++){
+        for(int i=0;i<m;i++){
             hash[t.charAt(i)]++;
-
         }
-        int l=0,r=0,minLen=Integer.MAX_VALUE;
-        int stIdx=-1;
-        int count=0;
-        while(r<m){
+        int l=0,r=0,count=0,start=-1;
+        int minLength=Integer.MAX_VALUE;
+        while(r<n){
             if(hash[s.charAt(r)]>0){
                 count++;
             }
             hash[s.charAt(r)]--;
-            r++;
-            while(count==n){
-                if(r-l<minLen){
-                    minLen=r-l;
-                    stIdx=l;
+            while(count==m){
+                if(r-l+1<minLength){
+                    minLength=r-l+1;
+                    start=l;
                 }
                 hash[s.charAt(l)]++;
                 if(hash[s.charAt(l)]>0){
@@ -27,10 +24,12 @@ class Solution {
                 }
                 l++;
             }
+            r++;
         }
-        if(stIdx==-1){
+        if(minLength==Integer.MAX_VALUE){
             return "";
+            
         }
-        return s.substring(stIdx,stIdx+minLen);
+        return s.substring(start,start+minLength);
     }
 }
