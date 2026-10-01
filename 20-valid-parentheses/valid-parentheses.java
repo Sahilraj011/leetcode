@@ -1,31 +1,6 @@
-// class Solution {
-//     public boolean isValid(String s) {
-//         Stack<Character> stack = new Stack<>();
-
-//         for (int i = 0; i < s.length(); i++) {
-//             char cur = s.charAt(i);
-//             if (!stack.isEmpty()) {
-//                 char last = stack.peek();
-//                 if (isPair(last, cur)) {
-//                     stack.pop();
-//                     continue;
-//                 }
-//             }
-//             stack.push(cur);
-//         }
-
-//         return stack.isEmpty();        
-//     }
-
-//     private boolean isPair(char last, char cur) {
-//         return (last == '(' && cur == ')') ||
-//                (last == '{' && cur == '}') ||
-//                (last == '[' && cur == ']');
-//     }    
-// }
 class Solution {
     public boolean isValid(String s) {
-        int n=s.length();
+       int n=s.length();
         if(n%2==1)return false;
         Stack <Character> st=new Stack<>();
         for(int i=0;i<n;i++){
@@ -45,5 +20,6 @@ class Solution {
         if(a=='['&&b==']')return true;
         if(a=='{'&&b=='}')return true;
         return false;
+
     }
 }
