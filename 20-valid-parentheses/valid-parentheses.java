@@ -1,25 +1,24 @@
 class Solution {
     public boolean isValid(String s) {
-       int n=s.length();
-        if(n%2==1)return false;
-        Stack <Character> st=new Stack<>();
+        int n=s.length();
+        Stack<Character>st=new Stack<>();
         for(int i=0;i<n;i++){
-            char ch=s.charAt(i);
-            if(ch=='('||ch=='['||ch=='{')st.push(ch);
-            else{
+            if(s.charAt(i)=='('||s.charAt(i)=='['||s.charAt(i)=='{'){
+                st.push(s.charAt(i));
+            }else{
                 if(st.size()==0)return false;
-                char top=st.peek();
-                if(sameStyle(top,ch))st.pop();
-                else return false;
+                char ch=st.peek();
+                st.pop();
+                if(s.charAt(i)==')'&&ch!='(')
+                return false;
+                else if(s.charAt(i)==']'&&ch!='['){
+                    return false;
+                }
+                else if(s.charAt(i)=='}'&&ch!='{'){
+                    return false;
+                }
             }
         }
-        return (st.size()==0);
-    }
-    static boolean sameStyle(char a,char b){
-        if(a=='('&&b==')')return true;
-        if(a=='['&&b==']')return true;
-        if(a=='{'&&b=='}')return true;
-        return false;
-
+        return st.size()==0;
     }
 }
