@@ -1,28 +1,18 @@
 class BSTIterator {
-    private Deque<TreeNode> stack;
-
+   private Stack<TreeNode> stack = new Stack<TreeNode>();
     public BSTIterator(TreeNode root) {
-        stack = new ArrayDeque<>();
-        pushAllLeft(root);
+        pushAll(root);
     }
-    
-    private void pushAllLeft(TreeNode node) {
-        while (node != null) {
-            stack.push(node);
-            node = node.left;
-        }
-    }
-
-    public int next() {
-        TreeNode topNode = stack.pop();
-        if (topNode.right != null) {
-            pushAllLeft(topNode.right);
-        }
-        
-        return topNode.val;
-    }
-
     public boolean hasNext() {
         return !stack.isEmpty();
+    }
+    public int next() {
+        TreeNode tmpNode = stack.pop();
+        pushAll(tmpNode.right);
+        return tmpNode.val;
+    }
+    
+    private void pushAll(TreeNode node) {
+        for (; node != null; stack.push(node), node = node.left);
     }
 }
